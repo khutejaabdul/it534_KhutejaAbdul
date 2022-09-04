@@ -1,0 +1,8 @@
+{	
+	"maxThreads": 4, 
+	"eventLogLocation": "log/actions.log", 
+	"typesOfEvents": "application", 
+	"fileTypes": ".txt", 
+	"debugMode": "N", 
+	"serverPort": 50000
+}
