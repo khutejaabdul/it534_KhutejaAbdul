@@ -10,7 +10,20 @@ from classes.label_text_style import *
 from datetime import datetime
 
 class My_Helpdesk_App():
+    """
+        This Class has all the functions that help creating the GUI form. It includes initializing the 
+        various componenents and then defining the functionality of each componenets on the GUI window
+        including the actions that trigger them.
+    """
     def __init__(self):
+        """
+            This is the initialization funtion which initiates the various components of the 
+            GUI user interface. This includes combo boxes and text boxes.
+            Arguments:
+                Takes in no arguments other than self.
+            Results:
+                No results.
+        """
         self.my_app_window = Tk()
        
         self.my_app_window.geometry("500x400")
@@ -32,15 +45,18 @@ class My_Helpdesk_App():
         
         self.setupInterface()
 
-    # def drawRadioButtons(self):
-    #     col_count = 0
-    #     for radioButton in self.rb_debugModeItems:
-    #         Radiobutton(self.my_app_window, text=radioButton, variable=self.rb_debugModeVal, value=radioButton).grid(row=6, column=col_count, sticky=NSEW)
-    #         col_count = col_count + 1
-
-    #     self.rb_debugModeVal.set(self.rb_debugModeItems[0])
 
     def getFile(self, *args):
+        """
+            This function opens the file being used to download the configuration data and 
+            loops through it to derive the various Json files and then depending on the 
+            field names, they are positioned next to the appropriate labels on the GUI form.
+            Arguments:
+                Takes in any number of arguments including self.
+            Results:
+                Displays the data within the configuration file against the text lables
+                on the gui form.
+        """
         openFile = askopenfilename()
         if openFile:
             with open(openFile) as my_file:
@@ -74,6 +90,14 @@ class My_Helpdesk_App():
     # def saveFile(self, *args):
 
     def setiupGrid(self):
+        """
+            This function defines the layout of the user GUI window.
+            Arguments:
+                Takes in no arguments except for self.
+            Results:
+                Sets up various text button labels for when the data is downloaded, it
+                shows against the labels.
+        """
         TextLabel(self.my_app_window, "Max Threads", 1, 0)
         TextLabel(self.my_app_window, "Log Location", 2, 0)
         TextLabel(self.my_app_window, "File Types", 3, 0)
@@ -83,19 +107,54 @@ class My_Helpdesk_App():
 
     
     def makeDownloadIcon(self):
+        """
+            This function defines a 'Download' button and sets its functions to download the existing configuration file
+            saved locally upon click. The getFile function is called which opens the file explorer window so the user can 
+            select a file to download.
+            Arguments:
+                Takes in no arguments except for self.
+            Results:
+                Defines the Download button and called the getFile function.
+        """
         open_button = Button(self.my_app_window, text= "Download", bg="blue", font="Arial", foreground="white", command=self.getFile)
         open_button.grid(row=0, column=0, sticky=W)
 
     def makeUploadIcon(self):
+        """
+            This function defines a 'Upload' button and sets its functions to upload the changes made by the user
+            into the GUI window and calls the submitData function to save the same to a new
+            Json file in the same directory.
+            Arguments:
+                Takes in no arguments except for self.
+            Results:
+                Defines the Upload button and called the submitData function.
+        """
         submitButton = Button(self.my_app_window, text="Upload", bg="blue", font="Arial", foreground="white")
         submitButton.grid(row=10, column=0, columnspan=1, sticky=NSEW)
         submitButton.bind("<Button-1>", self.submitData)
 
     def closeWindow(self):
+        """
+            This function defines a 'Close' button and sets its functions to close
+            upon user click
+            Arguments:
+                Takes in no arguments except for self.
+            Results:
+                Displayes a Close button and upon click closes it.     
+        """
         closeButton = Button(self.my_app_window, text="Close", bg="red", font="Arial", foreground="white", command=self.my_app_window.destroy)
         closeButton.grid(row=10, column=1, columnspan=1, sticky=NSEW)
 
     def setupInterface(self):
+        """
+            This function sets up the user interface, defining the different parts
+            of the interface such as the grid, start up buttons and other options.
+            Arguments:
+                Takes in no arguments except for self.
+            Results:
+                Calls each function defined within sequentially creating buttons and 
+                interface grid within the GUI window.      
+        """
         self.my_app_window.title("Helpdesk Configuration Settings")
         self.setiupGrid()
         self.makeDownloadIcon()
@@ -104,6 +163,15 @@ class My_Helpdesk_App():
         self.my_app_window.mainloop()
 
     def submitData(self, *args):
+        """
+            This function submits the data being collected from user to the 
+            function that writes the same to a Json file.
+            Arguments:
+                Takes in any number of arguments 
+            Results:
+                Calls the writeToJson function which writes data to a Json file 
+                and gives a message stating so.      
+        """
         print("You have clicked on Submit button")
         print("Max Threads value is: " + self.comboBoxVal1.get())
         print("Log file location is: " + self.theLocation.get())

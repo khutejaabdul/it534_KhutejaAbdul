@@ -1,7 +1,11 @@
 from tkinter import *
 
 class TextLabel(Text):
-
+    """
+        This class maintains the style for the text boxes in the
+        helpdesk class. Its called for creating text boxes or lables.
+    
+    """
     def __init__(self, passed_window=None, passed_labelText= "",
                 passed_row=0, passed_column=0, passed_columnspan=2, passed_sticky=NSEW):
         Text.__init__(self, passed_window, relief=RIDGE, width=20, height=1)
