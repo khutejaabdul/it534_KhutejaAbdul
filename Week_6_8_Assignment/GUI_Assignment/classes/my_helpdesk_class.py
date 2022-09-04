@@ -1,7 +1,3 @@
-from distutils.cmd import Command
-from fileinput import filename
-from lib2to3.pgen2.token import STRING
-import os
 import json
 from tkinter import *
 from tkinter import ttk
